@@ -1,0 +1,79 @@
+[tool.black]
+line-length = 180
+
+[tool.flake8]
+max-line-length = 172
+ignore = "E203"
+
+[tool.ruff]
+select = [
+    "E",  # pycodestyle errors
+    "F",  # pyflakes
+    "C",  # flake8-comprehensions
+]
+line-length = 172
+# Allow unused variables when underscore-prefixed.
+ignore = [
+    "E501",
+    "C408", # Unnecessary dict call - rewrite as a literal.
+    "C901", # Function is too complex
+    "C416", # Unnecessary list comprehension
+]
+
+[tool.poetry]
+name = "r2t"
+version = "0.0.3"
+description = "RSS to Telegram bot"
+license = "GPL-3.0-or-later"
+repository = "https://github.com/zrootorg/r2t"
+readme = "README.md"
+authors = [
+    "Luigi Operoso <@brokenpip3>", 
+    "Manuel Bovo <@mbovo>"
+]
+maintainers = [
+    "Luigi Operoso <@brokenpip3>", 
+    "Manuel Bovo <@mbovo>"
+]
+keywords = [
+    "rss",
+    "telegram",
+    "bot",
+    "rss-to-telegram",
+    "rss2telegram"
+]
+classifier = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Environment :: No Input/Output (Daemon)",
+    "Framework :: FastAPI",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+]
+include = ["LICENSE"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+click = "^8.0.1"
+colorama = "^0.4.4"
+rich = "^13.4.2"
+PyYAML = "^6.0"
+
+
+[tool.poetry.dev-dependencies]
+black = "^23.3.0"
+pytest = "^7.3.0"
+pytest-cov = "^4.1.0"
+pytest-xdist = "^3.3.1"
+pytest-flake8 = "^1.0.7"
+pytest-pylint = "^0.19.0"
+pytest-mock = "^3.6.1"
+autopep8 = "^1.5.7"
+ruff = "^0.0.275"
+
+[tool.poetry.scripts]
+r2t = "r2t.main:main"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
