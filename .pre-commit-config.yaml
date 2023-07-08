@@ -33,3 +33,9 @@ repos:
         - DL4006
         - --ignore
         - DL3015
+- repo: https://github.com/zrootorg/kubeconform-precommit-hook
+  rev: b4aa0bae1c8a3bf96d49fef920b0d2c317afa071
+  hooks:
+    - id: kubeconform
+      args:
+        - -pkubernetes
