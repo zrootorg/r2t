@@ -3,7 +3,7 @@
 Simple Rss feed reader for telegram
 Based on the fantastic work of [brokenpip3/rtt](https://github.com/brokenpip3/rtt)
 
-![example](example.png)
+![example](docs/example.png)
 
 ## Usage
 

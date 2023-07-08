@@ -28,11 +28,11 @@ license = "GPL-3.0-or-later"
 repository = "https://github.com/zrootorg/r2t"
 readme = "README.md"
 authors = [
-    "Luigi Operoso <@brokenpip3>", 
+    "Luigi Operoso <@brokenpip3>",
     "Manuel Bovo <@mbovo>"
 ]
 maintainers = [
-    "Luigi Operoso <@brokenpip3>", 
+    "Luigi Operoso <@brokenpip3>",
     "Manuel Bovo <@mbovo>"
 ]
 keywords = [
@@ -42,7 +42,7 @@ keywords = [
     "rss-to-telegram",
     "rss2telegram"
 ]
-classifier = [
+classifiers = [
     "Development Status :: 4 - Beta",
     "Environment :: Console",
     "Environment :: No Input/Output (Daemon)",
@@ -54,10 +54,10 @@ include = ["LICENSE"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-click = "^8.0.1"
-colorama = "^0.4.4"
-rich = "^13.4.2"
-PyYAML = "^6.0"
+#click = "^8.0.1"
+#colorama = "^0.4.4"
+#rich = "^13.4.2"
+#PyYAML = "^6.0"
 
 
 [tool.poetry.dev-dependencies]
@@ -72,7 +72,7 @@ autopep8 = "^1.5.7"
 ruff = "^0.0.275"
 
 [tool.poetry.scripts]
-r2t = "r2t.main:main"
+r2t = "r2t.cli:main"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
