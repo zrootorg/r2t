@@ -40,5 +40,5 @@ See [kubernetes](./kubernetes) directory for example deployment
 
 ## Credits
 
-[1 - Never miss magazines article - Fedora Magazine](https://fedoramagazine.org/never-miss-magazines-article-build-rss-notification-system/)
-[2 - brokenpip3/rtt](https://github.com/brokenpip3/rtt)
+1. [Never miss magazines article - Fedora Magazine](https://fedoramagazine.org/never-miss-magazines-article-build-rss-notification-system/)
+2. [brokenpip3/rtt](https://github.com/brokenpip3/rtt)
