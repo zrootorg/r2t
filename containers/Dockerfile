@@ -1,4 +1,4 @@
-FROM python:3.8-slim-buster
+FROM python:3.11-slim-buster
 
 LABEL maintainer="brokenpip3 <brokenpip3@gmail.com>"
 LABEL org.opencontainers.image.authors="brokenpip3 <brokenpip3@gmail.com>"
