@@ -39,6 +39,8 @@ def start(tg_token: Annotated[str, typer.Option("--telegram-token", "-t", envvar
            port: Annotated[int, typer.Option("--port", "-p", envvar="PORT", help="Port")] = 5000,
            config: Annotated[Optional[Path], typer.Option("--config", "-c", envvar="CONFIG_FILE", help="Config file")] = "./config.yaml",
            log_level: Annotated[str, typer.Option("--log-level", "-l", envvar="LOG_LEVEL", help="Log level")] = "info",
+           db_path: Annotated[str, typer.Option("--db-path", "-d", envvar="DB_PATH", help="SQLite db path")] = "./db.sqlite",
+           refresh_time: Annotated[str, typer.Option("--refresh-time", "-r", envvar="REFRESH_TIME", help="RSS Feed refresh time (s)")] = 30,
            ):
     set_sig_handler(sig_handler)
     logger.setup_logger(log_level)
@@ -51,6 +53,8 @@ def start(tg_token: Annotated[str, typer.Option("--telegram-token", "-t", envvar
     cfg.add("port",port)
     cfg.add("tg_token",tg_token)
     cfg.add("tg_chat_id",tg_chat_id)
+    cfg.add("db_path",db_path)
+    cfg.add("refresh_time",refresh_time)
     logging.debug(f"Config: {cfg}")
     server.run()
 

@@ -1,3 +1,20 @@
+# -*- coding: utf-8 -*-
+#
+# This file is part of the pdh (https://github.com/mbovo/pdh).
+# Copyright (c) 2016-2023 Manuel Bovo
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, version 3.
+#
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <http://www.gnu.org/licenses/>.
+#
 import logging
 import yaml
 import threading
@@ -37,11 +54,19 @@ class Config(object):
     def __getitem__(self, item):
         if item not in self.__map:
             raise KeyError
-        return self.__map[item]
+        try:
+            self.lock.acquire()
+            return self.__map[item]
+        finally:
+            self.lock.release()
 
     def __getattr__(self, item):
-        if item in self.__map:
-            return self.__map[item]
+        try:
+            self.lock.acquire()
+            if item in self.__map:
+                return self.__map[item]
+        finally:
+            self.lock.release()
 
     def add(self, item, value):
         try:

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #
 # This file is part of the pdh (https://github.com/mbovo/pdh).
 # Copyright (c) 2020-2023 Luigi Operoso, Manuel Bovo

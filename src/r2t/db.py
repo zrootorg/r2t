@@ -24,18 +24,27 @@ class DB(object):
         pass
 
     def create_table(self, table: str) -> bool:
-        cur = self.db.execute("CREATE TABLE IF NOT EXISTS ? (title text, date text)", (table))
+        cur = self.db.execute(f"CREATE TABLE IF NOT EXISTS {table} (title text, date text)")
         res = cur.fetchone()
         if res is None:
             return False
         return True
 
     def is_found(self, table: str, title: str, date: str) -> bool:
-        cur = self.db.execute("SELECT * from ? WHERE title=? AND date=?", (table, title, date))
+        # cur = self.db.execute("SELECT * from {table} WHERE title={title} AND date={date}")
+        cur = self.db.execute(
+            "SELECT * from " + table + " WHERE title=? AND date=?",
+            (title, date),
+        )
         if not cur.fetchall():
             return False
         return True
 
     def add_item(self, table: str, title: str, date: str) -> None:
-        self.db.execute("INSERT INTO ? VALUES (?,?)", (table, title, date))
+        self.db.execute("INSERT INTO " + table + " VALUES (?,?)", (title, date))
+        # self.db.execute("INSERT INTO {table} VALUES ({title},{date})")
         self.db_conn.commit()
+
+    def close(self):
+        self.db_conn.commit()
+        self.db_conn.close()

@@ -19,35 +19,44 @@
 from .db import DB
 import feedparser
 from typing import Dict,List
-import time
+import threading
+import logging
 
 class Parser(object):
     feeds: List = list()
     db: DB = None
 
-    def __init__(self, feeds:List[Dict[str,str]], db: DB)-> None:
+    def __init__(self, feeds:List[Dict[str,str]], db: DB, stop_event: threading.Event)-> None:
         self.feeds = feeds
         self.db = db
+        self.stop_event = stop_event
 
     def list_feeds(self):
         return self.feeds
 
     def parse(self):
+      logging.info("Start parsing feeds")
       for feed, url in self.feeds.items():
+            logging.info(f"Parse feed {feed} {url}")
+            if self.stop_event.is_set():
+                logging.info("Stop event, quit")
+                break
             self.db.create_table(feed)
             parsed_feed = feedparser.parse(url)
             for article in sorted(
-                parsed_feed["entries"], key=lambda k: k.published, reverse=False
+                parsed_feed["entries"],
+                key=lambda k: k.published,
+                reverse=False
             ):
-                if self.db.is_found(feed, article["title"], article["update"]):
+                if self.stop_event.is_set():
+                    logging.info("Stop event, quit")
+                    break
+                if self.db.is_found(feed, article["title"], article["updated"]):
+                    logging.info(f"Skip item {feed} {article['title']} {article['updated']}")
                     continue
-                self.db.add_item(feed, article["title"], article["update"])
-                # TODO: send message to telegram
-                time.sleep(5) # wait a bit to avoid telegram ban
+                logging.info(f"Add item {feed} {article['title']} {article['updated']}")
+                self.db.add_item(feed, article["title"], article["updated"])
 
-    def run(self):
-        # make it multi-threaded
-        pass
-    def stop():
-        # make it multi-threaded
+    def stop(self):
+        self.db.close()
         pass
