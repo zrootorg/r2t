@@ -33,7 +33,8 @@ repos:
         - DL4006
         - --ignore
         - DL3015
-- repo: https://github.com/zrootorg/kubeconform-precommit-hook
+#- repo: https://github.com/zrootorg/kubeconform-precommit-hook
+- repo: /Users/manuel.bovo/oss/kubeconform-precommit-hook
   rev: v0.0.1
   hooks:
     - id: kubeconform
